@@ -1,4 +1,4 @@
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import styled from "styled-components";
 
 interface IDayProps {
@@ -23,14 +23,27 @@ const DayElement = styled.div`
             margin-bottom: 0.25rem;
             text-align: center;
         }
+
+        .current-day {
+            background-color: orange;
+            padding: 10px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
     }
 `;
 
 export function Day({ day, rowIndex }: IDayProps): JSX.Element {
+    const getCurrentDayClass = () => {
+        return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
+            ? "current-day"
+            : "";
+    };
+
     return (
         <DayElement>
             <header>
-                <p>{day.format("DD")}</p>
+                <p className={`${getCurrentDayClass()}`}>{day.format("DD")}</p>
                 {rowIndex === 0 && <p>{day.format("ddd").toUpperCase()}</p>}
             </header>
         </DayElement>
