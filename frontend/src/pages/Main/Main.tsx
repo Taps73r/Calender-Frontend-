@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Month } from "../../components/Month.tsx";
 import { fetchCalender } from "../../api/fetchCalender.ts";
 import { ICalenderData } from "../../types/Calender.interface.ts";
+import { Modal } from "../../components/Modal.tsx";
 
 const MainContainer = styled.div`
     height: 100vh;
@@ -22,6 +23,7 @@ export function Main() {
         year: currentDate.getFullYear(),
         month: currentDate.toLocaleString("en-US", { month: "long" }),
     });
+    const [eventModal, setEventModal] = useState(false);
 
     const [calenderData, setCalenderData] = useState<ICalenderData | null>(
         null
@@ -40,6 +42,7 @@ export function Main() {
 
     return (
         <>
+            {eventModal && <Modal selectedDate={date} />}
             <MainContainer>
                 <ContentContainer>
                     {calenderData && (
@@ -47,6 +50,7 @@ export function Main() {
                             setDate={setDate}
                             calenderData={calenderData}
                             selectedDate={date}
+                            setEventModal={setEventModal}
                         />
                     )}
                 </ContentContainer>
