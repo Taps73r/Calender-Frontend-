@@ -1,31 +1,29 @@
-import dayjs from "dayjs";
-import React from "react";
 import styled from "styled-components";
+import { ICalenderData } from "../types/Calender.interface";
 import { Day } from "./Day";
+import { Dispatch, SetStateAction } from "react";
+import { IDate } from "../types/Date.interface";
+import { MonthYearChanger } from "./MonthYearChanger";
 
 interface IMonthProps {
-    currentMonth: dayjs.Dayjs[][];
+    calenderData: ICalenderData;
+    setDate: Dispatch<SetStateAction<IDate>>;
+    selectedDate: IDate;
 }
 
 const MonthElement = styled.div`
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 20px;
-    height: 90svh;
+    padding: 10px;
 `;
 
-export function Month({ currentMonth }: IMonthProps): JSX.Element {
+export function Month({
+    calenderData,
+    selectedDate,
+    setDate,
+}: IMonthProps): JSX.Element {
     return (
         <MonthElement>
-            {currentMonth.map((row, i) => (
-                <React.Fragment key={i}>
-                    {row.map((day, index) => (
-                        <Day day={day} key={index} rowIndex={i} />
-                    ))}
-                </React.Fragment>
-            ))}
+            <MonthYearChanger selectedDate={selectedDate} setDate={setDate} />
+            <Day days={calenderData.days} />
         </MonthElement>
     );
 }

@@ -1,40 +1,54 @@
-import { useState, useContext, useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getMonth } from "../../util.ts";
-import { GlobalContext } from "../../context/GlobalContext.tsx";
-import { Header } from "../../components/Header";
-import { Sidebar } from "../../components/Sidebar";
 import { Month } from "../../components/Month.tsx";
-import { Modal } from "../../components/Modal.tsx";
+import { fetchCalender } from "../../api/fetchCalender.ts";
+import { ICalenderData } from "../../types/Calender.interface.ts";
 
 const MainContainer = styled.div`
     height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
 `;
 
 const ContentContainer = styled.div`
-    flex: 1;
     display: flex;
+    justify-content: flex-end;
 `;
 
 export function Main() {
-    const [currentMonth, setCurrentMonth] = useState(getMonth());
-    const { monthIndex, showEventModal } = useContext(GlobalContext);
+    const currentDate = new Date();
+    const [date, setDate] = useState({
+        year: currentDate.getFullYear(),
+        month: currentDate.toLocaleString("en-US", { month: "long" }),
+    });
+
+    const [calenderData, setCalenderData] = useState<ICalenderData | null>(
+        null
+    );
 
     useEffect(() => {
-        setCurrentMonth(getMonth(monthIndex));
-    }, [monthIndex]);
+        console.log(date);
+        fetchCalender(date.year, date.month)
+            .then((data) => {
+                setCalenderData(data);
+            })
+            .catch((error) => {
+                console.error("Error fetching calendar data:", error);
+            });
+    }, [date]);
 
     return (
         <>
-            {showEventModal && <Modal />}
-
             <MainContainer>
-                <Header />
                 <ContentContainer>
-                    <Sidebar />
-                    <Month currentMonth={currentMonth} />
+                    {calenderData && (
+                        <Month
+                            setDate={setDate}
+                            calenderData={calenderData}
+                            selectedDate={date}
+                        />
+                    )}
                 </ContentContainer>
             </MainContainer>
         </>
