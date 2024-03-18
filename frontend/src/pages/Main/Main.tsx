@@ -42,7 +42,9 @@ export function Main() {
 
     return (
         <>
-            {eventModal && <Modal selectedDate={date} />}
+            {eventModal && (
+                <Modal selectedDate={date} setEventModal={setEventModal} />
+            )}
             <MainContainer>
                 <ContentContainer>
                     {calenderData && (
