@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Month } from "../../components/Month.tsx";
 import { fetchCalender } from "../../api/fetchCalender.ts";
-import { ICalenderData } from "../../types/Calender.interface.ts";
+import { ICalenderData, IDay } from "../../types/Calender.interface.ts";
 import { Modal } from "../../components/Modal.tsx";
+import { SideBar } from "../../components/SideBar.tsx";
 
 const MainContainer = styled.div`
     height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-end;
 `;
 
@@ -29,8 +30,9 @@ export function Main() {
         null
     );
 
+    const [modalData, setModalData] = useState<IDay>();
+
     useEffect(() => {
-        console.log(date);
         fetchCalender(date.year, date.month)
             .then((data) => {
                 setCalenderData(data);
@@ -43,15 +45,20 @@ export function Main() {
     return (
         <>
             {eventModal && (
-                <Modal selectedDate={date} setEventModal={setEventModal} />
+                <Modal
+                    modalData={modalData}
+                    setEventModal={setEventModal}
+                    setCalenderData={setCalenderData}
+                    calenderData={calenderData}
+                />
             )}
             <MainContainer>
+                <SideBar setDate={setDate} selectedDate={date} />
                 <ContentContainer>
                     {calenderData && (
                         <Month
-                            setDate={setDate}
+                            setModalData={setModalData}
                             calenderData={calenderData}
-                            selectedDate={date}
                             setEventModal={setEventModal}
                         />
                     )}
