@@ -1,36 +1,9 @@
-import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { IRegisterFields } from "../types/Register.interface";
 import { fetchLogin } from "../api/fetchLogin";
-
-const LoginFormContainer = styled.form`
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    height: 500px;
-    padding: 10px;
-    border-radius: 6px;
-    overlow: hidden;
-    background-color: gray;
-    gap: 10px;
-
-    h1 {
-        text-align: center;
-    }
-`;
-
-const Input = styled.input`
-    border-radius: 4px;
-    border: 1px solid black;
-    margin: 20px;
-    padding: 4px;
-    cursor: pointer;
-`;
-
-const Error = styled.span`
-    color: red;
-`;
+import { Button, Error, LoginFormContainer } from "../styles/Login.styles";
+import { Input } from "../styles/Registration.styles";
 
 export function LoginForm(): JSX.Element {
     const history = useNavigate();
@@ -86,7 +59,7 @@ export function LoginForm(): JSX.Element {
             />
             {errors.password && <Error>{errors.password.message}</Error>}
 
-            <Input type="submit" value="Login" />
+            <Button type="submit">Login</Button>
             <Link to="/registration">Go to Registration</Link>
         </LoginFormContainer>
     );
