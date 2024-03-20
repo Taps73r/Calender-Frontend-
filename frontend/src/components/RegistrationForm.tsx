@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { IRegisterFields } from "../types/Register.interface";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchRegister } from "../api/fetchRegister";
 
 const RegistrationFormContainer = styled.form`
@@ -33,6 +33,8 @@ const Error = styled.span`
 `;
 
 export function RegistrationForm(): JSX.Element {
+    const history = useNavigate();
+
     const {
         register,
         handleSubmit,
@@ -40,7 +42,13 @@ export function RegistrationForm(): JSX.Element {
     } = useForm<IRegisterFields>();
 
     const onSubmit = (data: IRegisterFields) => {
-        fetchRegister(data);
+        fetchRegister(data)
+            .then(() => {
+                history("/main");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
     return (

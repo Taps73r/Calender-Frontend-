@@ -1,16 +1,16 @@
 import axios, { AxiosResponse } from "axios";
-import { IEventData } from "../types/Event.interface";
+import { IEvent } from "../types/Event.interface";
 import { ICalenderData } from "../types/Calender.interface";
 import { Dispatch, SetStateAction } from "react";
 import Cookies from "js-cookie";
 
-export function sendEvent(
-    eventData: IEventData,
+export function updateEvent(
+    eventData: IEvent,
     setCalenderData: Dispatch<SetStateAction<ICalenderData | null>>,
     calenderData: ICalenderData | null
 ) {
     const token = Cookies.get("token");
-    const url = `http://localhost:3000/events`;
+    const url = `http://localhost:3000/events/${eventData?.id}`;
     return axios
         .post(url, eventData, {
             headers: {

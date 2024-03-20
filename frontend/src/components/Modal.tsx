@@ -4,7 +4,7 @@ import { InputError } from "./InputError";
 import { IModal } from "../types/Modal.interface";
 import { Dispatch, SetStateAction } from "react";
 import { sendEvent } from "../api/sendEvent";
-import { IEvent } from "../types/Event.interface";
+import { IEventData } from "../types/Event.interface";
 import { ICalenderData, IDay } from "../types/Calender.interface";
 
 interface IModalProps {
@@ -94,7 +94,7 @@ export function Modal({
     } = useForm<IModal>();
 
     const onSubmit = (data: IModal) => {
-        const eventData: IEvent = {
+        const eventData: IEventData = {
             title: data.name,
             description: data.description,
             color: data.color,

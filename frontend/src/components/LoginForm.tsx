@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IRegisterFields } from "../types/Register.interface";
 import { fetchLogin } from "../api/fetchLogin";
 
@@ -33,6 +33,8 @@ const Error = styled.span`
 `;
 
 export function LoginForm(): JSX.Element {
+    const history = useNavigate();
+
     const {
         register,
         handleSubmit,
@@ -40,7 +42,13 @@ export function LoginForm(): JSX.Element {
     } = useForm<IRegisterFields>();
 
     const onSubmit = (data: IRegisterFields) => {
-        fetchLogin(data).then(() => {});
+        fetchLogin(data)
+            .then(() => {
+                history("/main");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
     return (

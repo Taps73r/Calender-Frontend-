@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import { IDay } from "../types/Calender.interface";
 import { Dispatch, SetStateAction } from "react";
+import { IEvent } from "../types/Event.interface";
 
 interface IDayProps {
     days: IDay[];
     setEventModal: Dispatch<SetStateAction<boolean>>;
     setModalData: Dispatch<SetStateAction<IDay | undefined>>;
+    setEventData: Dispatch<SetStateAction<IEvent | undefined>>;
+    setEventMenu: Dispatch<SetStateAction<boolean>>;
 }
 
 const DayContainer = styled.div`
@@ -37,12 +40,15 @@ export function Day({
     days,
     setEventModal,
     setModalData,
+    setEventData,
+    setEventMenu,
 }: IDayProps): JSX.Element {
     const weeks = [];
+
     for (let i = 0; i < days.length; i += 7) {
         weeks.push(days.slice(i, i + 7));
     }
-    console.log(weeks);
+
     return (
         <DayContainer>
             {weeks.map((week, weekIndex) => (
@@ -50,13 +56,18 @@ export function Day({
                     {week.map((day, dayIndex) => (
                         <DayElement
                             onClick={() => {
-                                setEventModal(true);
-                                setModalData({
-                                    day: day.day,
-                                    month: day.month,
-                                    year: day.year,
-                                    dayOfWeek: day.dayOfWeek,
-                                });
+                                if (day.event) {
+                                    setEventData(day.event);
+                                    setEventMenu(true);
+                                } else {
+                                    setEventModal(true);
+                                    setModalData({
+                                        day: day.day,
+                                        month: day.month,
+                                        year: day.year,
+                                        dayOfWeek: day.dayOfWeek,
+                                    });
+                                }
                             }}
                             key={dayIndex}
                             className="day"

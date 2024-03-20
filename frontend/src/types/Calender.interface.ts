@@ -5,7 +5,7 @@ export interface IDay {
     dayOfWeek?: string;
     month?: string;
     year?: number;
-    event?: IEvent;
+    event?: IEvent | null;
 }
 
 export interface ICalenderData {
