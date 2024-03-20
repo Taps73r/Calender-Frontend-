@@ -1,14 +1,12 @@
-import styled from "styled-components";
 import { IDate } from "../types/Date.interface";
 import { Dispatch, SetStateAction } from "react";
 import { months } from "../contants/months";
+import { MonthYearChangerContainer } from "../styles/MonthYearChanger.styles";
 
 interface IMonthYearChangerProps {
     setDate: Dispatch<SetStateAction<IDate>>;
     selectedDate: IDate;
 }
-
-const MonthYearChangerContainer = styled.div``;
 
 export function MonthYearChanger({
     setDate,
@@ -46,8 +44,8 @@ export function MonthYearChanger({
 
     return (
         <MonthYearChangerContainer>
-            <button onClick={setPrevMonth}>Previous</button>
-            <button onClick={setNextMonth}>Next</button>
+            <button onClick={setPrevMonth}>&#x003C;</button>
+            <button onClick={setNextMonth}>&#x003E;</button>
         </MonthYearChangerContainer>
     );
 }

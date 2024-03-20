@@ -1,14 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
-import styled from "styled-components";
 import { IDate } from "../types/Date.interface";
 import { MonthYearChanger } from "./MonthYearChanger";
+import { SideBarContainer } from "../styles/SideBar.style";
 
 interface ISideBarProps {
     setDate: Dispatch<SetStateAction<IDate>>;
     selectedDate: IDate;
 }
-
-const SideBarContainer = styled.div``;
 
 export function SideBar({ setDate, selectedDate }: ISideBarProps): JSX.Element {
     return (
