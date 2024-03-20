@@ -13,7 +13,7 @@ export const RegistrationFormContainer = styled.form`
     display: flex;
     flex-direction: column;
     width: 400px;
-    height: 500px;
+    height: 450px;
     padding: 10px;
     border-radius: 6px;
     overlow: hidden;
