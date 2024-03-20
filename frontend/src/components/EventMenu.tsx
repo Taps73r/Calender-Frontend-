@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { IEvent } from "../types/Event.interface";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { ICalenderData } from "../types/Calender.interface";
 import { deleteEvent } from "../api/deleteEvent";
 
@@ -44,6 +44,8 @@ export function EventMenu({
     calenderData,
     setCalenderData,
 }: IEventMenuProps): JSX.Element {
+    const [updateEvent, setUpdateEvent] = useState<boolean>(false);
+
     const handleDeleteEvent = (id?: string) => {
         deleteEvent(id).then(() => {
             if (calenderData) {
@@ -63,20 +65,24 @@ export function EventMenu({
     return (
         <>
             <EventMenuContainer>
-                <p>{eventData?.title}</p>
-                <p>{eventData?.description}</p>
-                <p>Color: {eventData?.color}</p>
-                <EventMenuButton>
-                    <button>Update</button>
-                    <button
-                        onClick={() => {
-                            handleDeleteEvent(eventData?.id);
-                            setEventMenu(false);
-                        }}
-                    >
-                        Delete
-                    </button>
-                </EventMenuButton>
+                {
+                    <>
+                        <p>{eventData?.title}</p>
+                        <p>{eventData?.description}</p>
+                        <p>Color: {eventData?.color}</p>
+                        <EventMenuButton>
+                            <button>Update</button>
+                            <button
+                                onClick={() => {
+                                    handleDeleteEvent(eventData?.id);
+                                    setEventMenu(false);
+                                }}
+                            >
+                                Delete
+                            </button>
+                        </EventMenuButton>
+                    </>
+                }
             </EventMenuContainer>
             <EventMenuBg onClick={() => setEventMenu(false)}></EventMenuBg>
         </>

@@ -36,7 +36,7 @@ export function Main() {
 
     const [eventMenu, setEventMenu] = useState<boolean>(false);
     const [eventData, setEventData] = useState<IEvent>();
-    
+
     useEffect(() => {
         fetchCalender(date.year, date.month)
             .then((data) => {
