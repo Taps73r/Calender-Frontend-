@@ -14,6 +14,7 @@ interface IMonthProps {
 
 const MonthElement = styled.div`
     padding: 10px;
+    height: 100%;
 `;
 
 export function Month({

@@ -1,7 +1,13 @@
-import styled from "styled-components";
 import { IDay } from "../types/Calender.interface";
 import { Dispatch, SetStateAction } from "react";
 import { IEvent } from "../types/Event.interface";
+import {
+    DayContainer,
+    DayElement,
+    DayName,
+    EventContainer,
+    WeekColumn,
+} from "../styles/Day.styles";
 
 interface IDayProps {
     days: IDay[];
@@ -10,31 +16,6 @@ interface IDayProps {
     setEventData: Dispatch<SetStateAction<IEvent | undefined>>;
     setEventMenu: Dispatch<SetStateAction<boolean>>;
 }
-
-const DayContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-`;
-
-const WeekColumn = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-`;
-
-const DayElement = styled.div`
-    background-color: grey;
-    width: 160px;
-    display: flex;
-    height: 130px;
-    gap: 10px;
-    padding: 5px;
-    border-radius: 4px;
-    cursor: pointer;
-`;
-
-const EventContainer = styled.div``;
 
 export function Day({
     days,
@@ -72,9 +53,11 @@ export function Day({
                             key={dayIndex}
                             className="day"
                         >
-                            <p>{day.day}</p>
-                            <p>{day.dayOfWeek}</p>
-                            <EventContainer>
+                            <DayName>
+                                <p>{day.day}</p>
+                                <p>{day.dayOfWeek}</p>
+                            </DayName>
+                            <EventContainer color={day.event?.color}>
                                 <p>{day.event?.title}</p>
                             </EventContainer>
                         </DayElement>
