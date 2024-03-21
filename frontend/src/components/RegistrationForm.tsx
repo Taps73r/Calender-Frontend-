@@ -1,15 +1,25 @@
 import { useForm } from "react-hook-form";
 import { IRegisterFields } from "../types/Register.interface";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchRegister } from "../api/fetchRegister";
+import Cookies from "js-cookie";
 import {
     Button,
     Error,
     Input,
     RegistrationFormContainer,
 } from "../styles/Registration.styles";
+import { Dispatch, SetStateAction } from "react";
+import axios from "axios";
 
-export function RegistrationForm(): JSX.Element {
+interface IRegistrationFormProps {
+    setErrorHandler: Dispatch<SetStateAction<string | null>>;
+    setErrorResponse: Dispatch<SetStateAction<number | undefined>>;
+}
+
+export function RegistrationForm({
+    setErrorHandler,
+    setErrorResponse,
+}: IRegistrationFormProps): JSX.Element {
     const history = useNavigate();
 
     const {
@@ -19,12 +29,22 @@ export function RegistrationForm(): JSX.Element {
     } = useForm<IRegisterFields>();
 
     const onSubmit = (data: IRegisterFields) => {
-        fetchRegister(data)
-            .then(() => {
+        const url = "http://localhost:3000/register";
+        return axios
+            .post(url, data)
+            .then((response) => {
+                const token = response.data.token;
+                if (token) {
+                    Cookies.set("token", token, {
+                        expires: 1,
+                        sameSite: "strict",
+                    });
+                }
                 history("/main");
             })
             .catch((error) => {
-                console.error(error);
+                setErrorHandler(error.response.data.message);
+                setErrorResponse(error.response.status);
             });
     };
 

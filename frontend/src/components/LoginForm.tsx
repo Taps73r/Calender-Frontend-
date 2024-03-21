@@ -1,11 +1,21 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import { IRegisterFields } from "../types/Register.interface";
-import { fetchLogin } from "../api/fetchLogin";
 import { Button, Error, LoginFormContainer } from "../styles/Login.styles";
 import { Input } from "../styles/Registration.styles";
+import { Dispatch, SetStateAction } from "react";
+import axios from "axios";
 
-export function LoginForm(): JSX.Element {
+interface ILoginFormProps {
+    setErrorHandler: Dispatch<SetStateAction<string | null>>;
+    setErrorResponse: Dispatch<SetStateAction<number | undefined>>;
+}
+
+export function LoginForm({
+    setErrorHandler,
+    setErrorResponse,
+}: ILoginFormProps): JSX.Element {
     const history = useNavigate();
 
     const {
@@ -15,12 +25,22 @@ export function LoginForm(): JSX.Element {
     } = useForm<IRegisterFields>();
 
     const onSubmit = (data: IRegisterFields) => {
-        fetchLogin(data)
-            .then(() => {
+        const url = "http://localhost:3000/login";
+        return axios
+            .post(url, data)
+            .then((response) => {
+                const token = response.data.token;
+                if (token) {
+                    Cookies.set("token", token, {
+                        expires: 1,
+                        sameSite: "strict",
+                    });
+                }
                 history("/main");
             })
             .catch((error) => {
-                console.error(error);
+                setErrorHandler(error.response.data.message);
+                setErrorResponse(error.response.status);
             });
     };
 
