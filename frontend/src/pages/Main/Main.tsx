@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Month } from "../../components/Month.tsx";
 import { fetchCalender } from "../../api/fetchCalender.ts";
@@ -8,6 +8,11 @@ import { SideBar } from "../../components/SideBar.tsx";
 import { IEvent } from "../../types/Event.interface.ts";
 import { EventMenu } from "../../components/EventMenu.tsx";
 import { UpdateEvent } from "../../components/UpdateEvent.tsx";
+
+interface IMainProps {
+    setErrorHandler: Dispatch<SetStateAction<string | null>>;
+    setErrorResponse: Dispatch<SetStateAction<number | undefined>>;
+}
 
 const MainContainer = styled.div`
     height: 100vh;
@@ -23,7 +28,10 @@ const ContentContainer = styled.div`
     justify-content: flex-end;
 `;
 
-export function Main() {
+export function Main({
+    setErrorHandler,
+    setErrorResponse,
+}: IMainProps): JSX.Element {
     const currentDate = new Date();
     const [date, setDate] = useState({
         year: currentDate.getFullYear(),
@@ -42,7 +50,7 @@ export function Main() {
     const [updateEvent, setUpdateEvent] = useState<boolean>(false);
 
     useEffect(() => {
-        fetchCalender(date.year, date.month)
+        fetchCalender(date.year, date.month, setErrorHandler, setErrorResponse)
             .then((data) => {
                 setCalenderData(data);
             })
@@ -55,6 +63,8 @@ export function Main() {
         <>
             {eventModal && (
                 <Modal
+                    setErrorHandler={setErrorHandler}
+                    setErrorResponse={setErrorResponse}
                     modalData={modalData}
                     setEventModal={setEventModal}
                     setCalenderData={setCalenderData}
@@ -63,6 +73,8 @@ export function Main() {
             )}
             {eventMenu && (
                 <EventMenu
+                    setErrorHandler={setErrorHandler}
+                    setErrorResponse={setErrorResponse}
                     eventData={eventData}
                     setEventMenu={setEventMenu}
                     calenderData={calenderData}
@@ -72,6 +84,8 @@ export function Main() {
             )}
             {updateEvent && (
                 <UpdateEvent
+                    setErrorHandler={setErrorHandler}
+                    setErrorResponse={setErrorResponse}
                     setUpdateEvent={setUpdateEvent}
                     eventData={eventData}
                     calenderData={calenderData}

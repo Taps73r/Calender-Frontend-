@@ -1,11 +1,13 @@
-import axios, { AxiosResponse } from "axios";
-import { ICalenderData } from "../types/Calender.interface";
+import axios from "axios";
 import Cookies from "js-cookie";
+import { Dispatch, SetStateAction } from "react";
 
 export function fetchCalender(
     year: number,
-    month: string
-): Promise<ICalenderData> {
+    month: string,
+    setErrorHandler: Dispatch<SetStateAction<string | null>>,
+    setErrorResponse: Dispatch<SetStateAction<number | undefined>>
+) {
     const token = Cookies.get("token");
     const url = `http://localhost:3000/events/${year}/${month}`;
     return axios
@@ -14,12 +16,11 @@ export function fetchCalender(
                 Authorization: `Bearer ${token}`,
             },
         })
-        .then((response: AxiosResponse<ICalenderData>) => {
-            console.log(response.data);
+        .then((response) => {
             return response.data;
         })
         .catch((error) => {
-            console.error("Error fetching calendar data:", error);
-            throw error;
+            setErrorHandler(error.response.data.message);
+            setErrorResponse(error.response.status);
         });
 }

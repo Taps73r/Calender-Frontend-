@@ -21,6 +21,8 @@ interface IModalProps {
     modalData?: IDay;
     calenderData: ICalenderData | null;
     setCalenderData: Dispatch<SetStateAction<ICalenderData | null>>;
+    setErrorHandler: Dispatch<SetStateAction<string | null>>;
+    setErrorResponse: Dispatch<SetStateAction<number | undefined>>;
 }
 
 export function Modal({
@@ -28,6 +30,8 @@ export function Modal({
     modalData,
     calenderData,
     setCalenderData,
+    setErrorHandler,
+    setErrorResponse,
 }: IModalProps): JSX.Element {
     const {
         register,
@@ -47,7 +51,13 @@ export function Modal({
                 dayOfWeek: modalData?.dayOfWeek,
             },
         };
-        sendEvent(eventData, setCalenderData, calenderData);
+        sendEvent(
+            eventData,
+            setCalenderData,
+            calenderData,
+            setErrorHandler,
+            setErrorResponse
+        );
         setEventModal(false);
     };
 

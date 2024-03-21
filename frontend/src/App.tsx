@@ -5,6 +5,7 @@ import { Register } from "./pages/Authorization/Register";
 import { Login } from "./pages/Authorization/Login";
 import { useState } from "react";
 import { ErrorHandler } from "./components/ErrorHandler";
+
 function App() {
     const [errorHandler, setErrorHandler] = useState<string | null>(null);
     const [errorResponse, setErrorResponse] = useState<number>();
@@ -21,7 +22,15 @@ function App() {
                 <></>
             )}
             <Routes>
-                <Route element={<Main />} path="/main" />
+                <Route
+                    element={
+                        <Main
+                            setErrorHandler={setErrorHandler}
+                            setErrorResponse={setErrorResponse}
+                        />
+                    }
+                    path="/main"
+                />
                 <Route
                     element={
                         <Register

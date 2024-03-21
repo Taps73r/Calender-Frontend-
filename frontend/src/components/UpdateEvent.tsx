@@ -21,6 +21,8 @@ interface UpdateEventProps {
     setUpdateEvent: Dispatch<SetStateAction<boolean>>;
     calenderData: ICalenderData | null;
     setCalenderData: Dispatch<SetStateAction<ICalenderData | null>>;
+    setErrorHandler: Dispatch<SetStateAction<string | null>>;
+    setErrorResponse: Dispatch<SetStateAction<number | undefined>>;
 }
 
 export function UpdateEvent({
@@ -28,6 +30,8 @@ export function UpdateEvent({
     setUpdateEvent,
     calenderData,
     setCalenderData,
+    setErrorResponse,
+    setErrorHandler,
 }: UpdateEventProps): JSX.Element {
     const {
         register,
@@ -48,7 +52,13 @@ export function UpdateEvent({
                 dayOfWeek: eventData?.date.dayOfWeek,
             },
         };
-        updateEvent(updatedEventData, setCalenderData, calenderData);
+        updateEvent(
+            updatedEventData,
+            setCalenderData,
+            calenderData,
+            setErrorResponse,
+            setErrorHandler
+        );
         setUpdateEvent(false);
     };
 

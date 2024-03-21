@@ -7,7 +7,9 @@ import Cookies from "js-cookie";
 export function sendEvent(
     eventData: IEventData,
     setCalenderData: Dispatch<SetStateAction<ICalenderData | null>>,
-    calenderData: ICalenderData | null
+    calenderData: ICalenderData | null,
+    setErrorHandler: Dispatch<SetStateAction<string | null>>,
+    setErrorResponse: Dispatch<SetStateAction<number | undefined>>
 ) {
     const token = Cookies.get("token");
     const url = `http://localhost:3000/events`;
@@ -34,7 +36,7 @@ export function sendEvent(
             }
         })
         .catch((error) => {
-            console.error("Error send event:", error);
-            throw error;
+            setErrorHandler(error.response.data.message);
+            setErrorResponse(error.response.status);
         });
 }
