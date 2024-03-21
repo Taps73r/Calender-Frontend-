@@ -16,6 +16,7 @@ interface IEventMenuProps {
     setEventMenu: Dispatch<SetStateAction<boolean>>;
     calenderData: ICalenderData | null;
     setCalenderData: Dispatch<SetStateAction<ICalenderData | null>>;
+    setUpdateEvent: Dispatch<SetStateAction<boolean>>;
 }
 
 export function EventMenu({
@@ -23,6 +24,7 @@ export function EventMenu({
     setEventMenu,
     calenderData,
     setCalenderData,
+    setUpdateEvent,
 }: IEventMenuProps): JSX.Element {
     const handleDeleteEvent = (id?: string) => {
         deleteEvent(id).then(() => {
@@ -57,7 +59,14 @@ export function EventMenu({
                     </p>
                     <p>Color: {eventData?.color}</p>
                     <EventMenuButton>
-                        <button>Update</button>
+                        <button
+                            onClick={() => {
+                                setEventMenu(false);
+                                setUpdateEvent(true);
+                            }}
+                        >
+                            Update
+                        </button>
                         <button
                             onClick={() => {
                                 handleDeleteEvent(eventData?.id);

@@ -5,19 +5,20 @@ import { Dispatch, SetStateAction } from "react";
 import Cookies from "js-cookie";
 
 export function updateEvent(
-    eventData: IEvent,
+    updatedEventData: IEvent,
     setCalenderData: Dispatch<SetStateAction<ICalenderData | null>>,
     calenderData: ICalenderData | null
 ) {
     const token = Cookies.get("token");
-    const url = `http://localhost:3000/events/${eventData?.id}`;
+    const url = `http://localhost:3000/events/${updatedEventData?.id}`;
     return axios
-        .post(url, eventData, {
+        .put(url, updatedEventData, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         })
         .then((response: AxiosResponse) => {
+            console.log(response);
             const updatedDay = response.data;
             if (calenderData) {
                 const updatedCalendarData: ICalenderData = { ...calenderData };

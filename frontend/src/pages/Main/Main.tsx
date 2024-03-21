@@ -7,6 +7,7 @@ import { Modal } from "../../components/Modal.tsx";
 import { SideBar } from "../../components/SideBar.tsx";
 import { IEvent } from "../../types/Event.interface.ts";
 import { EventMenu } from "../../components/EventMenu.tsx";
+import { UpdateEvent } from "../../components/UpdateEvent.tsx";
 
 const MainContainer = styled.div`
     height: 100vh;
@@ -38,6 +39,7 @@ export function Main() {
 
     const [eventMenu, setEventMenu] = useState<boolean>(false);
     const [eventData, setEventData] = useState<IEvent>();
+    const [updateEvent, setUpdateEvent] = useState<boolean>(false);
 
     useEffect(() => {
         fetchCalender(date.year, date.month)
@@ -48,7 +50,7 @@ export function Main() {
                 console.error("Error fetching calendar data:", error);
             });
     }, [date]);
-
+    console.log(eventData);
     return (
         <>
             {eventModal && (
@@ -63,6 +65,15 @@ export function Main() {
                 <EventMenu
                     eventData={eventData}
                     setEventMenu={setEventMenu}
+                    calenderData={calenderData}
+                    setCalenderData={setCalenderData}
+                    setUpdateEvent={setUpdateEvent}
+                />
+            )}
+            {updateEvent && (
+                <UpdateEvent
+                    setUpdateEvent={setUpdateEvent}
+                    eventData={eventData}
                     calenderData={calenderData}
                     setCalenderData={setCalenderData}
                 />
