@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { InputError } from "./InputError";
 import { IModal } from "../types/Modal.interface";
@@ -6,6 +5,16 @@ import { Dispatch, SetStateAction } from "react";
 import { sendEvent } from "../api/sendEvent";
 import { IEventData } from "../types/Event.interface";
 import { ICalenderData, IDay } from "../types/Calender.interface";
+import {
+    ButtonSend,
+    Date,
+    Header,
+    Input,
+    ModalBg,
+    ModalContainer,
+    Select,
+    Textarea,
+} from "../styles/Modal.styles";
 
 interface IModalProps {
     setEventModal: Dispatch<SetStateAction<boolean>>;
@@ -13,73 +22,6 @@ interface IModalProps {
     calenderData: ICalenderData | null;
     setCalenderData: Dispatch<SetStateAction<ICalenderData | null>>;
 }
-
-const ModalBg = styled.div`
-    position: absolute;
-    z-index: 4;
-    background-color: grey;
-    height: 100svh;
-    width: 100svw;
-    opacity: 0.5;
-    overflow: hidden;
-    cursor: pointer;
-`;
-
-const ModalContainer = styled.form`
-    position: absolute;
-    background-color: white;
-    z-index: 5;
-    top: 20%;
-    left: 50%;
-    display: flex;
-    flex-direction: column;
-    padding: 50px;
-    gap: 20px;
-    border-radius: 10px;
-    overflow: hidden;
-`;
-
-const Input = styled.input`
-    margin-bottom: 10px;
-    width: 220px;
-    height: 30px;
-`;
-
-const Select = styled.select`
-    margin-bottom: 10px;
-    width: 224px;
-    height: 30px;
-`;
-
-const Textarea = styled.input`
-    margin-bottom: 10px;
-    width: 220px;
-    height: 30px;
-`;
-
-const ButtonSend = styled.button`
-    width: 224px;
-    height: 30px;
-    cursor: pointer;
-`;
-
-const Header = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
-    button {
-        padding: 3px 5px;
-        cursor: pointer;
-    }
-`;
-
-const Date = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-`;
 
 export function Modal({
     setEventModal,
@@ -122,7 +64,7 @@ export function Modal({
                     <button onClick={() => setEventModal(false)}>X</button>
                 </Header>
                 <Input
-                    {...register("name", { required: true })}
+                    {...register("name", { required: "name is required" })}
                     type="text"
                     placeholder="Name"
                 />

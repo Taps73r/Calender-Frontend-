@@ -5,10 +5,12 @@ interface IInputErrorProps {
 }
 
 const ErrorInput = styled.div`
-    postition: absolute;
-    z-index: 6;
+    position: absolute;
+    bottom: 59%;
+    color: red;
+    left: 6%;
 `;
 
 export function InputError({ errorMessage }: IInputErrorProps): JSX.Element {
-    return <ErrorInput>{errorMessage}</ErrorInput>;
+    return <ErrorInput>*{errorMessage}</ErrorInput>;
 }
