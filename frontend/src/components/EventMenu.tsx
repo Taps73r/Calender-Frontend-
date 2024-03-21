@@ -1,8 +1,15 @@
-import styled from "styled-components";
 import { IEvent } from "../types/Event.interface";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { ICalenderData } from "../types/Calender.interface";
 import { deleteEvent } from "../api/deleteEvent";
+import {
+    EventMenuBg,
+    Button,
+    EventMenuButton,
+    EventMenuContainer,
+    EventMenuWrapper,
+    EventName,
+} from "../styles/EventMenu.styles";
 
 interface IEventMenuProps {
     eventData?: IEvent;
@@ -11,41 +18,12 @@ interface IEventMenuProps {
     setCalenderData: Dispatch<SetStateAction<ICalenderData | null>>;
 }
 
-const EventMenuContainer = styled.div`
-    position: absolute;
-    background-color: white;
-    z-index: 5;
-    top: 20%;
-    left: 20%;
-    display: flex;
-    flex-direction: column;
-    padding: 50px;
-    gap: 20px;
-    border-radius: 10px;
-    overflow: hidden;
-`;
-
-const EventMenuBg = styled.div`
-    position: absolute;
-    z-index: 4;
-    background-color: grey;
-    height: 100svh;
-    width: 100svw;
-    opacity: 0.5;
-    overflow: hidden;
-    cursor: pointer;
-`;
-
-const EventMenuButton = styled.div``;
-
 export function EventMenu({
     eventData,
     setEventMenu,
     calenderData,
     setCalenderData,
 }: IEventMenuProps): JSX.Element {
-    const [updateEvent, setUpdateEvent] = useState<boolean>(false);
-
     const handleDeleteEvent = (id?: string) => {
         deleteEvent(id).then(() => {
             if (calenderData) {
@@ -65,24 +43,31 @@ export function EventMenu({
     return (
         <>
             <EventMenuContainer>
-                {
-                    <>
+                <Button onClick={() => setEventMenu(false)}>X</Button>
+                <EventMenuWrapper>
+                    <EventName>
+                        <p>Event name: </p>
                         <p>{eventData?.title}</p>
-                        <p>{eventData?.description}</p>
-                        <p>Color: {eventData?.color}</p>
-                        <EventMenuButton>
-                            <button>Update</button>
-                            <button
-                                onClick={() => {
-                                    handleDeleteEvent(eventData?.id);
-                                    setEventMenu(false);
-                                }}
-                            >
-                                Delete
-                            </button>
-                        </EventMenuButton>
-                    </>
-                }
+                    </EventName>
+                    <p>
+                        Event description:{" "}
+                        {eventData?.description
+                            ? eventData?.description
+                            : "empty"}
+                    </p>
+                    <p>Color: {eventData?.color}</p>
+                    <EventMenuButton>
+                        <button>Update</button>
+                        <button
+                            onClick={() => {
+                                handleDeleteEvent(eventData?.id);
+                                setEventMenu(false);
+                            }}
+                        >
+                            Delete
+                        </button>
+                    </EventMenuButton>
+                </EventMenuWrapper>
             </EventMenuContainer>
             <EventMenuBg onClick={() => setEventMenu(false)}></EventMenuBg>
         </>

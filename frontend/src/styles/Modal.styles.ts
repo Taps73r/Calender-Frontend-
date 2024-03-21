@@ -19,6 +19,7 @@ export const ModalContainer = styled.form`
     z-index: 5;
     top: 20%;
     left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     border-radius: 10px;
