@@ -29,7 +29,7 @@ function App() {
                             setErrorResponse={setErrorResponse}
                         />
                     }
-                    path="/main"
+                    path="/"
                 />
                 <Route
                     element={
