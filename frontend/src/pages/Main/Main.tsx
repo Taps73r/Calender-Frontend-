@@ -90,11 +90,14 @@ export function Main({
                 <ContentContainer>
                     {calenderData && (
                         <Month
+                            setCalenderData={setCalenderData}
                             setEventMenu={setEventMenu}
                             setEventData={setEventData}
                             setModalData={setModalData}
                             calenderData={calenderData}
                             setEventModal={setEventModal}
+                            setErrorHandler={setErrorHandler}
+                            setErrorResponse={setErrorResponse}
                         />
                     )}
                 </ContentContainer>

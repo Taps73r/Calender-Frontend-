@@ -6,7 +6,7 @@ export interface IDay {
     month?: string;
     year?: number;
     event?: IEvent | null;
-    holiday?: IHoliday | null;
+    holiday?: IHoliday |null;
 }
 
 export interface IHoliday {
@@ -17,7 +17,7 @@ export interface IHoliday {
         year?: number;
         month?: string;
         day?: number;
-    };
+    }
 }
 
 export interface ICalenderData {

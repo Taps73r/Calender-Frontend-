@@ -10,6 +10,9 @@ interface IMonthProps {
     setModalData: Dispatch<SetStateAction<IDay | undefined>>;
     setEventData: Dispatch<SetStateAction<IEvent | undefined>>;
     setEventMenu: Dispatch<SetStateAction<boolean>>;
+    setCalenderData: Dispatch<SetStateAction<ICalenderData | null>>;
+    setErrorHandler: Dispatch<SetStateAction<string | null>>;
+    setErrorResponse: Dispatch<SetStateAction<number | undefined>>;
 }
 
 const MonthElement = styled.div`
@@ -23,15 +26,22 @@ export function Month({
     setModalData,
     setEventData,
     setEventMenu,
+    setCalenderData,
+    setErrorResponse,
+    setErrorHandler,
 }: IMonthProps): JSX.Element {
     return (
         <MonthElement>
             <Day
+                setCalenderData={setCalenderData}
                 setEventData={setEventData}
                 setEventMenu={setEventMenu}
                 setModalData={setModalData}
                 days={calenderData.days}
                 setEventModal={setEventModal}
+                calenderData={calenderData}
+                setErrorHandler={setErrorHandler}
+                setErrorResponse={setErrorResponse}
             />
         </MonthElement>
     );

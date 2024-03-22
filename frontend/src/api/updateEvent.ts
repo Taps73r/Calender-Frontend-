@@ -20,7 +20,6 @@ export function updateEvent(
             },
         })
         .then((response: AxiosResponse) => {
-            console.log(response);
             const updatedDay = response.data;
             if (calenderData) {
                 const updatedCalendarData: ICalenderData = { ...calenderData };
