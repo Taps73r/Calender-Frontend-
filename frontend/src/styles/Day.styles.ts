@@ -40,3 +40,11 @@ export const EventContainer = styled.div`
     max-height: 48px;
     overflow: hidden;
 `;
+
+export const HolidayContainer = styled.div`
+    word-wrap: break-word;
+    background-color: ${({ color }) => color || "transparent"};
+    border-radius: 2px;
+    max-height: 70px;
+    overflow: hidden;
+`;

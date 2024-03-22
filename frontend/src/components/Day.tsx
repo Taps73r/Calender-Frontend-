@@ -6,6 +6,7 @@ import {
     DayElement,
     DayName,
     EventContainer,
+    HolidayContainer,
     WeekColumn,
 } from "../styles/Day.styles";
 
@@ -60,6 +61,9 @@ export function Day({
                             <EventContainer color={day.event?.color}>
                                 <p>{day.event?.title}</p>
                             </EventContainer>
+                            <HolidayContainer color={day.holiday?.color}>
+                                <p>{day.holiday?.title}</p>
+                            </HolidayContainer>
                         </DayElement>
                     ))}
                 </WeekColumn>
