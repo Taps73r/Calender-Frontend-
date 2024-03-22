@@ -82,10 +82,10 @@ export function Modal({
                     <InputError errorMessage={errors.name.message} />
                 )}
                 <Select {...register("color")}>
-                    <option value="red">Red</option>
-                    <option value="blue">Blue</option>
-                    <option value="green">Green</option>
-                    <option value="yellow">Yellow</option>
+                    <option value="#ee6055">Red</option>
+                    <option value="#60d394">Blue</option>
+                    <option value="#aaf683">Green</option>
+                    <option value="#ffd97d">Yellow</option>
                 </Select>
                 <Textarea
                     {...register("description")}

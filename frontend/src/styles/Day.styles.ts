@@ -34,6 +34,7 @@ export const DayName = styled.div`
 `;
 
 export const EventContainer = styled.div`
+    padding: 2px;
     word-wrap: break-word;
     background-color: ${({ color }) => color || "transparent"};
     border-radius: 2px;
@@ -43,6 +44,7 @@ export const EventContainer = styled.div`
 
 export const HolidayContainer = styled.div`
     word-wrap: break-word;
+    padding: 2px;
     background-color: ${({ color }) => color || "transparent"};
     border-radius: 2px;
     max-height: 70px;

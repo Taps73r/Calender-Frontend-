@@ -40,7 +40,7 @@ export function RegistrationForm({
                         sameSite: "strict",
                     });
                 }
-                history("/main");
+                history("/");
             })
             .catch((error) => {
                 setErrorHandler(error.response.data.message);
