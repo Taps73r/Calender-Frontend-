@@ -80,13 +80,6 @@ export function Main({
                 />
             )}
             <MainContainer>
-                <SideBar
-                    setDate={setDate}
-                    selectedDate={date}
-                    setCalenderData={setCalenderData}
-                    setErrorHandler={setErrorHandler}
-                    setErrorResponse={setErrorResponse}
-                />
                 <ContentContainer>
                     {calenderData && (
                         <Month
@@ -101,6 +94,13 @@ export function Main({
                         />
                     )}
                 </ContentContainer>
+                <SideBar
+                    setDate={setDate}
+                    selectedDate={date}
+                    setCalenderData={setCalenderData}
+                    setErrorHandler={setErrorHandler}
+                    setErrorResponse={setErrorResponse}
+                />
             </MainContainer>
         </>
     );

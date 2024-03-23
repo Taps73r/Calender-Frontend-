@@ -8,7 +8,7 @@ export const SideBarContainer = styled.div`
     align-items: center;
     gap: 10px;
     background-color: #f6ae2d;
-    width: 100%;
+    width: 400px;
     border-radius: 0 10px 10px 0;
 
     p {

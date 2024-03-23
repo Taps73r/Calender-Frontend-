@@ -31,6 +31,9 @@ export const DayName = styled.div`
     display: flex;
     flex-direction: row;
     gap: 10px;
+    p {
+        word-wrap: break-word;
+    }
 `;
 
 export const EventContainer = styled.div`
