@@ -41,8 +41,10 @@ export function Day({
         null
     );
 
-    const handleDragStart = (eventItem: IEvent) => {
-        setDraggedEvent(eventItem);
+    const handleDragStart = (eventItem?: IEvent | null) => {
+        if (eventItem) {
+            setDraggedEvent(eventItem);
+        }
     };
 
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -52,8 +54,6 @@ export function Day({
     const handleDrop = (event: React.DragEvent<HTMLDivElement>, day: IDay) => {
         event.preventDefault();
         if (draggedEvent) {
-            console.log(`Перетягнуто на день: ${day.day}`);
-            console.log("Перетягувана подія:", draggedEvent);
             const token = Cookies.get("token");
             axios
                 .put(

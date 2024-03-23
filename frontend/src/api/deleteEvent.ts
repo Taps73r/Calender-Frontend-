@@ -3,9 +3,9 @@ import Cookies from "js-cookie";
 import { Dispatch, SetStateAction } from "react";
 
 export function deleteEvent(
-    eventId?: string,
     setErrorHandler: Dispatch<SetStateAction<string | null>>,
-    setErrorResponse: Dispatch<SetStateAction<number | undefined>>
+    setErrorResponse: Dispatch<SetStateAction<number | undefined>>,
+    eventId?: string
 ) {
     const token = Cookies.get("token");
     const url = `https://calender-backend-1qdj.onrender.com/events/${eventId}`;

@@ -31,7 +31,7 @@ export function EventMenu({
     setErrorHandler,
 }: IEventMenuProps): JSX.Element {
     const handleDeleteEvent = (id?: string) => {
-        deleteEvent(id, setErrorHandler, setErrorResponse).then(() => {
+        deleteEvent(setErrorHandler, setErrorResponse, id).then(() => {
             if (calenderData) {
                 const updatedCalenderData = {
                     ...calenderData,
