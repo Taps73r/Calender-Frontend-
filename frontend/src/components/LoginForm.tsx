@@ -25,7 +25,7 @@ export function LoginForm({
     } = useForm<IRegisterFields>();
 
     const onSubmit = (data: IRegisterFields) => {
-        const url = "http://localhost:3000/login";
+        const url = "https://calender-backend-1qdj.onrender.com/login";
         return axios
             .post(url, data)
             .then((response) => {

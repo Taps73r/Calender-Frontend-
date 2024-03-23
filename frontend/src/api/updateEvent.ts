@@ -12,7 +12,7 @@ export function updateEvent(
     setErrorHandler: Dispatch<SetStateAction<string | null>>
 ) {
     const token = Cookies.get("token");
-    const url = `http://localhost:3000/events/${updatedEventData?.id}`;
+    const url = `https://calender-backend-1qdj.onrender.com/events/${updatedEventData?.id}`;
     return axios
         .put(url, updatedEventData, {
             headers: {

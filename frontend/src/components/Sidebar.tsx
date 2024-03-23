@@ -38,7 +38,7 @@ export function SideBar({
     const onSubmit = async (data: IFormData) => {
         const title = data.eventName;
         const token = Cookies.get("token");
-        const url = `http://localhost:3000/events/${title}`;
+        const url = `https://calender-backend-1qdj.onrender.com/events/${title}`;
         return axios
             .get(url, {
                 headers: {

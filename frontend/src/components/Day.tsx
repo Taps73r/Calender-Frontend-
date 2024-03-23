@@ -57,7 +57,7 @@ export function Day({
             const token = Cookies.get("token");
             axios
                 .put(
-                    `http://localhost:3000/events/update-date/${draggedEvent.id}`,
+                    `https://calender-backend-1qdj.onrender.com/events/update-date/${draggedEvent.id}`,
                     {
                         newDate: {
                             year: draggedEvent.date.year,

@@ -29,7 +29,7 @@ export function RegistrationForm({
     } = useForm<IRegisterFields>();
 
     const onSubmit = (data: IRegisterFields) => {
-        const url = "http://localhost:3000/register";
+        const url = "https://calender-backend-1qdj.onrender.com/register";
         return axios
             .post(url, data)
             .then((response) => {

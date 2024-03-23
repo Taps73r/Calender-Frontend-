@@ -9,7 +9,7 @@ export function fetchCalender(
     setErrorResponse: Dispatch<SetStateAction<number | undefined>>
 ) {
     const token = Cookies.get("token");
-    const url = `http://localhost:3000/events/${year}/${month}`;
+    const url = `https://calender-backend-1qdj.onrender.com/events/${year}/${month}`;
     return axios
         .get(url, {
             headers: {

@@ -8,7 +8,7 @@ export function deleteEvent(
     setErrorResponse: Dispatch<SetStateAction<number | undefined>>
 ) {
     const token = Cookies.get("token");
-    const url = `http://localhost:3000/events/${eventId}`;
+    const url = `https://calender-backend-1qdj.onrender.com/events/${eventId}`;
     return axios
         .delete(url, {
             headers: {
